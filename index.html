@@ -162,7 +162,7 @@
       <b>Nota:</b> Feed dipaparkan melalui <i>Page Plugin</i> rasmi Meta — dalam pratonton chat ia mungkin
       kosong (Facebook sekat <i>framing</i> dari domain tak dikenali); setelah <i>deploy</i> ke GitHub Pages
       ia muncul automatik. Untuk kemas kini senarai jabatan, edit <b>Google Sheet</b> sahaja —
-      lihat langkah di bahagian <b>SHEET_CSV_URL</b> dalam fail.
+      lihat langkah di bahagian <b>SHEET__URL</b> dalam fail.
     </div>
   </div>
 </section>
@@ -173,7 +173,7 @@
   <div class="foot-inner">
     <div><b>Sehenti Berita Pendidikan</b><br>Agregasi sah · Page Plugin Meta · tiada scraping.</div>
     <div style="text-align:right">
-      Sumber data: Google Sheet (terbitan CSV).<br>
+      Sumber data: Google Sheet (terbitan ).<br>
       <span style="color:#9fe0b0">✓ Disahkan</span> / <span style="color:#e9c884">⚠ Semak</span> — set dalam lajur <b>status</b>.
     </div>
   </div>
@@ -195,7 +195,7 @@
    d. Salin URL terbitan itu, tampal di bawah (gantikan "" ).
       Fail starter sedia import diberi berasingan: senarai-jpn-facebook.csv
    ================================================================= */
-const SHEET_CSV_URL = "";   // <-- TAMPAL URL CSV TERBITAN DI SINI
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSAhqo4Px1u3jMUdzETxfXovNdUt4C1UNM49ftCGDjhxYxWAjM7yjG_TUsf_2n7NVKxb-NEocw8QQZ6/pub?gid=540719396&single=true&output=csv";   // <-- TAMPAL URL CSV TERBITAN DI SINI
 
 /* 2) Palet warna automatik bila lajur 'warna' dibiar kosong */
 const PALETTE=["#1A5276","#117864","#922B21","#7D3C98","#B9770E","#1F618D","#117A65",
