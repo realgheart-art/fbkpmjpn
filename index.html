@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sehenti Berita Pendidikan — KPM &amp; JPN Seluruh Malaysia</title>
+<meta name="description" content="Papan agregat posting Facebook rasmi Kementerian Pendidikan Malaysia dan semua Jabatan Pendidikan Negeri dalam satu paparan." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     Palette : "Warta Persekutuan" — biru institusi + emas diraja
+     ------------------------------------------------------------
+     --ink     #0A1F44  biru pekat (teks/masthead)
+     --royal   #143B7A  biru JPN
+     --azure   #2E6FE0  biru terang (aksen interaktif)
+     --gold    #C8902A  emas (penanda rasmi)
+     --paper   #F6F4EE  kertas (latar)
+     --cloud   #FFFFFF  putih kad
+     ============================================================ */
+  :root{
+    --ink:#0A1F44; --royal:#143B7A; --azure:#2E6FE0; --gold:#C8902A;
+    --paper:#F6F4EE; --cloud:#FFFFFF; --line:#E2DDD0; --muted:#5C6577;
+    --shadow:0 1px 2px rgba(10,31,68,.06),0 8px 24px rgba(10,31,68,.07);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead{
+    background:var(--ink); color:#fff;
+    border-bottom:3px solid var(--gold);
+  }
+  .masthead-inner{max-width:1320px;margin:0 auto;padding:22px 22px 18px}
+  .mast-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+    border-bottom:1px solid rgba(255,255,255,.16);padding-bottom:12px;flex-wrap:wrap}
+  .kicker{font-family:"Sora";font-size:.72rem;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--gold)}
+  .title{font-family:"Sora";font-weight:800;font-size:clamp(1.7rem,4.6vw,2.9rem);
+    letter-spacing:-.02em;line-height:1.02;margin:6px 0 0}
+  .mast-meta{text-align:right;font-size:.78rem;color:rgba(255,255,255,.72);
+    font-family:"Sora";letter-spacing:.04em;min-width:170px}
+  .mast-meta strong{display:block;color:#fff;font-weight:600;font-size:.92rem}
+  .tagline{margin:12px 0 0;font-size:.95rem;color:rgba(255,255,255,.78);max-width:60ch}
+
+  /* ---------- CONTROL BAR ---------- */
+  .controls{position:sticky;top:0;z-index:30;background:rgba(246,244,238,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .controls-inner{max-width:1320px;margin:0 auto;padding:14px 22px;
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .search{flex:1;min-width:220px;position:relative}
+  .search input{width:100%;padding:11px 14px 11px 40px;border:1px solid var(--line);
+    border-radius:10px;background:#fff;font:inherit;font-size:.92rem;color:var(--ink)}
+  .search input:focus{outline:2px solid var(--azure);outline-offset:1px;border-color:transparent}
+  .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    width:16px;height:16px;color:var(--muted)}
+  .count{font-family:"Sora";font-size:.8rem;color:var(--muted);white-space:nowrap}
+  .count b{color:var(--royal)}
+
+  .pills{display:flex;gap:8px;overflow-x:auto;padding:4px 22px 14px;max-width:1320px;
+    margin:0 auto;-ms-overflow-style:none;scrollbar-width:thin}
+  .pill{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--royal);
+    padding:7px 14px;border-radius:999px;font:inherit;font-size:.82rem;font-weight:500;
+    cursor:pointer;transition:.15s;font-family:"Sora";letter-spacing:.01em}
+  .pill:hover{border-color:var(--azure);color:var(--azure)}
+  .pill[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* ---------- NOTICE ---------- */
+  .notice{max-width:1320px;margin:18px auto 0;padding:0 22px}
+  .notice-card{background:#FFF8E8;border:1px solid #EAD8A6;border-left:4px solid var(--gold);
+    border-radius:12px;padding:14px 16px;font-size:.86rem;color:#6B5414;display:flex;gap:12px}
+  .notice-card svg{flex:0 0 auto;width:18px;height:18px;color:var(--gold);margin-top:2px}
+  .notice-card b{color:#594410}
+
+  /* ---------- GRID ---------- */
+  .wall{max-width:1320px;margin:22px auto 60px;padding:0 22px;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+  .feed{background:var(--cloud);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;
+    transition:transform .18s,box-shadow .18s}
+  .feed:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(10,31,68,.13)}
+  .feed.kpm{border-color:var(--gold)}
+  .feed-head{padding:14px 16px;display:flex;align-items:center;gap:11px;
+    border-bottom:1px solid var(--line);position:relative}
+  .dot{width:11px;height:11px;border-radius:3px;flex:0 0 auto;margin-top:3px}
+  .feed-name{flex:1;min-width:0}
+  .feed-name .state{font-family:"Sora";font-weight:700;font-size:.98rem;
+    color:var(--ink);line-height:1.15}
+  .feed-name .org{font-size:.74rem;color:var(--muted);margin-top:1px}
+  .badge{font-family:"Sora";font-size:.6rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;padding:3px 7px;border-radius:5px;white-space:nowrap}
+  .badge.ok{background:#E7F0FF;color:var(--azure)}
+  .badge.check{background:#FBEEDD;color:#A9701B}
+  .badge.kpm{background:var(--gold);color:#fff}
+  .feed-embed{position:relative;background:#EEF1F6;min-height:520px;flex:1}
+  .feed-embed iframe{width:100%;height:560px;border:0;display:block}
+  .embed-fallback{position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:12px;text-align:center;padding:28px;
+    color:var(--muted);font-size:.86rem}
+  .embed-fallback svg{width:34px;height:34px;color:#B6C0D4}
+  .feed-foot{padding:11px 16px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .open-link{font-family:"Sora";font-size:.8rem;font-weight:600;color:var(--azure);
+    text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .open-link:hover{color:var(--royal)}
+  .open-link svg{width:14px;height:14px}
+  .handle{font-size:.72rem;color:#aab2c2;font-family:"Sora"}
+
+  /* ---------- EMPTY ---------- */
+  .empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted)}
+  .empty b{color:var(--ink);font-family:"Sora"}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);font-size:.82rem}
+  .foot-inner{max-width:1320px;margin:0 auto;padding:26px 22px;
+    display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .foot-inner b{color:#fff;font-family:"Sora"}
+  footer a{color:var(--gold);text-decoration:none}
+
+  @media(max-width:560px){
+    .wall{grid-template-columns:1fr;padding:0 16px}
+    .controls-inner,.notice,.pills,.masthead-inner{padding-left:16px;padding-right:16px}
+    .mast-meta{text-align:left}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="mast-top">
+      <div>
+        <div class="kicker">Pusat Sehenti · Pemantauan Rasmi</div>
+        <h1 class="title">Sehenti Berita Pendidikan</h1>
+      </div>
+      <div class="mast-meta">
+        <span>EDISI HARI INI</span>
+        <strong id="today">—</strong>
+      </div>
+    </div>
+    <p class="tagline">Papan agregat posting Facebook rasmi Kementerian Pendidikan Malaysia
+      dan semua Jabatan Pendidikan Negeri — dalam satu paparan, dikemas kini terus dari Facebook.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Cari jabatan… (cth: Kedah, KPM, Sarawak)" aria-label="Cari jabatan" />
+    </div>
+    <div class="count">Memaparkan <b id="shown">0</b> daripada <b id="total">0</b> jabatan</div>
+  </div>
+</div>
+<div class="pills" id="pills"></div>
+
+<section class="notice">
+  <div class="notice-card">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
+    <div>
+      <b>Nota teknikal:</b> Feed Facebook dipaparkan melalui <i>Page Plugin</i> rasmi Meta.
+      Dalam pratonton (cth: dalam chat) feed mungkin tidak muncul kerana Facebook menyekat
+      <i>framing</i> dari domain tidak dikenali — ini <b>normal</b>. Setelah di-<i>deploy</i> ke
+      GitHub Pages (domain HTTPS sebenar), semua feed akan dipaparkan automatik. Butang
+      <b>Buka di Facebook</b> sentiasa berfungsi sebagai sandaran.
+    </div>
+  </div>
+</section>
+
+<main class="wall" id="wall" aria-live="polite"></main>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      <b>Sehenti Berita Pendidikan</b><br>
+      Agregasi sah melalui Facebook Page Plugin · tiada scraping · tiada API.
+    </div>
+    <div style="text-align:right">
+      Lencana <span style="color:#9fe0b0">✓ Disahkan</span> = handle disemak ·
+      <span style="color:#e9c884">⚠ Semak</span> = sila sahkan handle.<br>
+      Sunting senarai jabatan dalam pemboleh ubah <b>FEEDS</b> di hujung fail.
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =================================================================
+   SENARAI JABATAN  —  SUMBER TUNGGAL KEBENARAN
+   -----------------------------------------------------------------
+   Sunting di sini sahaja untuk tambah / betulkan jabatan.
+   • page   : username ATAU ID halaman Facebook (cth: "KemPendidikan" atau "61584558187780")
+   • status : "ok"  = handle telah disahkan
+              "check" = anggaran, SILA SAHKAN sebelum guna rasmi
+   Cara sahkan: buka facebook.com/<page> — jika halaman betul muncul, tukar status ke "ok".
+   ================================================================= */
+const FEEDS = [
+  { state:"KPM",            org:"Kementerian Pendidikan Malaysia", page:"KemPendidikan", color:"#C8902A", status:"ok",   kpm:true },
+  { state:"Johor",          org:"Jabatan Pendidikan Negeri",       page:"JPNJohor",      color:"#C0392B", status:"ok" },
+  { state:"Kedah",          org:"Jabatan Pendidikan Negeri",       page:"61584558187780",color:"#1E8449", status:"check" },
+  { state:"Kelantan",       org:"Jabatan Pendidikan Negeri",       page:"JPNKelantan",   color:"#B9770E", status:"ok" },
+  { state:"Melaka",         org:"Jabatan Pendidikan Negeri",       page:"jpnmelaka",     color:"#922B21", status:"check" },
+  { state:"Negeri Sembilan",org:"Jabatan Pendidikan Negeri",       page:"jpnns",         color:"#7D3C98", status:"check" },
+  { state:"Pahang",         org:"Jabatan Pendidikan Negeri",       page:"jpnpahang",     color:"#1F618D", status:"check" },
+  { state:"Perak",          org:"Jabatan Pendidikan Negeri",       page:"jpnperak",      color:"#117A65", status:"check" },
+  { state:"Perlis",         org:"Jabatan Pendidikan Negeri",       page:"jpnperlis",     color:"#B7950B", status:"check" },
+  { state:"Pulau Pinang",   org:"Jabatan Pendidikan Negeri",       page:"jpnpenang",     color:"#117864", status:"ok" },
+  { state:"Sabah",          org:"Jabatan Pendidikan Negeri",       page:"jpnsbh",        color:"#2471A3", status:"ok" },
+  { state:"Sarawak",        org:"Jabatan Pendidikan Negeri",       page:"edusarawak",    color:"#CA6F1E", status:"ok" },
+  { state:"Selangor",       org:"Jabatan Pendidikan Negeri",       page:"jpnsel",        color:"#1A5276", status:"ok" },
+  { state:"Terengganu",     org:"Jabatan Pendidikan Negeri",       page:"jpnterengganu", color:"#0E6655", status:"check" },
+  { state:"WP Kuala Lumpur",org:"Jabatan Pendidikan",              page:"jpnwpkl",       color:"#34495E", status:"check" },
+  { state:"WP Labuan",      org:"Jabatan Pendidikan",              page:"jpnwplabuan",   color:"#5D6D7E", status:"check" },
+  { state:"WP Putrajaya",   org:"Jabatan Pendidikan",             page:"jpnwpputrajaya",color:"#283747", status:"check" },
+];
+
+/* ---- tarikh hari ini (BM) ---- */
+const hari=["Ahad","Isnin","Selasa","Rabu","Khamis","Jumaat","Sabtu"];
+const bulan=["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
+const d=new Date();
+document.getElementById("today").textContent=`${hari[d.getDay()]}, ${d.getDate()} ${bulan[d.getMonth()]} ${d.getFullYear()}`;
+
+const wall=document.getElementById("wall");
+const qInput=document.getElementById("q");
+const shownEl=document.getElementById("shown");
+const totalEl=document.getElementById("total");
+totalEl.textContent=FEEDS.length;
+
+let activeRegion="Semua";
+
+function pageUrl(p){ return /^\d+$/.test(p) ? `https://www.facebook.com/${p}` : `https://www.facebook.com/${p}`; }
+function pluginSrc(p){
+  const href=encodeURIComponent(pageUrl(p));
+  return `https://www.facebook.com/plugins/page.php?href=${href}&tabs=timeline&width=400&height=560&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&lazy=true`;
+}
+
+function card(f){
+  const el=document.createElement("article");
+  el.className="feed"+(f.kpm?" kpm":"");
+  el.dataset.name=(f.state+" "+f.org).toLowerCase();
+  const badge = f.kpm
+    ? '<span class="badge kpm">Pusat</span>'
+    : (f.status==="ok" ? '<span class="badge ok">✓ Disahkan</span>'
+                       : '<span class="badge check">⚠ Semak</span>');
+  el.innerHTML=`
+    <div class="feed-head">
+      <span class="dot" style="background:${f.color}"></span>
+      <div class="feed-name">
+        <div class="state">${f.state}</div>
+        <div class="org">${f.org}</div>
+      </div>
+      ${badge}
+    </div>
+    <div class="feed-embed">
+      <div class="embed-fallback">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+        <div>Memuatkan feed…<br><small>Jika kosong, buka terus di Facebook di bawah.</small></div>
+      </div>
+      <iframe loading="lazy" title="Feed ${f.state}"
+        src="${pluginSrc(f.page)}"
+        scrolling="no" frameborder="0" allowfullscreen="true"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+    </div>
+    <div class="feed-foot">
+      <a class="open-link" href="${pageUrl(f.page)}" target="_blank" rel="noopener">
+        Buka di Facebook
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <span class="handle">@${f.page}</span>
+    </div>`;
+  return el;
+}
+
+function render(){
+  const q=qInput.value.trim().toLowerCase();
+  wall.innerHTML="";
+  let shown=0;
+  FEEDS.forEach(f=>{
+    const matchRegion = activeRegion==="Semua"
+      || (activeRegion==="KPM" && f.kpm)
+      || f.state===activeRegion;
+    const matchQ = !q || (f.state+" "+f.org).toLowerCase().includes(q);
+    if(matchRegion && matchQ){ wall.appendChild(card(f)); shown++; }
+  });
+  if(shown===0){
+    const e=document.createElement("div");
+    e.className="empty";
+    e.innerHTML=`<b>Tiada jabatan sepadan.</b><br>Cuba kata kunci lain atau pilih “Semua”.`;
+    wall.appendChild(e);
+  }
+  shownEl.textContent=shown;
+}
+
+/* ---- pil penapis ---- */
+const regions=["Semua","KPM",...FEEDS.filter(f=>!f.kpm).map(f=>f.state)];
+const pills=document.getElementById("pills");
+regions.forEach((r,i)=>{
+  const b=document.createElement("button");
+  b.className="pill"; b.textContent=r; b.setAttribute("aria-pressed", i===0?"true":"false");
+  b.onclick=()=>{
+    activeRegion=r;
+    [...pills.children].forEach(p=>p.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    render();
+  };
+  pills.appendChild(b);
+});
+
+qInput.addEventListener("input",render);
+render();
+</script>
+</body>
+</html>
